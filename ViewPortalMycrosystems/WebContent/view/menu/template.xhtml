@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Page template with PrimeFaces</title>
+
+<f:metadata>
+	<ui:insert name="metadata" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"></meta>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+
+
+	<style>
+@media screen and (max-width: 810px) {
+	.ui-tabs.ui-tabs-top>.ui-tabs-nav li {
+		width: 100% !important;
+	}
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited
+	{
+	color: #ff4f00;
+}
+
+.ui-widget-header {
+	border: 1px solid #d49768;
+	background: #ff4f0094;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+/*=======================================================
+						Components
+=========================================================*/
+/*==================     Brand     ======================*/
+.brand {
+	display: inline-block;
+}
+
+.brand_name {
+	display: inline-block;
+	overflow: hidden;
+	font-weight: 400;
+	/* 	font-size: 40px; */
+	font-size: 1.75rem;
+	line-height: 62px;
+	color: #ff4f00;
+	vertical-align: bottom;
+	font-family: arial;
+	text-align: center;
+}
+
+.brand_slogan {
+	display: inline-block;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	font-size: 24px;
+	vertical-align: bottom;
+}
+
+.brand a:hover {
+	color: inherit;
+}
+</style>
+
+
+
+
+
+	<h:form id="form-signin">
+		<p:menubar>
+
+
+
+			<p:submenu label="Gestion" icon="ui-icon-contact">
+
+				<p:menuitem value="Afiliados" url="/view/gestion/afiliados.xhtml" />
+				<p:menuitem value="Cargue Archivos"
+					url="/view/gestion/cargueArchivos.xhtml" />
+
+
+			</p:submenu>
+
+
+
+
+
+
+
+
+
+
+
+			<f:facet name="options">
+
+
+
+
+				<p:outputLabel style="margin-right:15px;font-weight: bold;" />
+				<p:commandButton value="Cerrar Sesión"
+					styleClass="btn btn-lg btn-primary btn-block"
+					style=" font-size: 15px !important; color: #ff4f00;
+	background-color: #f0e8db;
+	border-color: #ff4f00;"
+					actionListener="#{MBLogin.cerrarSesion}" icon="ui-icon-extlink" />
+			</f:facet>
+		</p:menubar>
+
+
+
+	</h:form>
+
+
+
+</h:head>
+
+<h:body class="text-center">
+
+
+
+	<ui:insert name="content" />
+
+
+</h:body>
+
+
+</html>

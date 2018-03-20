@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/view/menu/template.xhtml">
+	<ui:define name="content">
+		<h:form id="formPrincipal" enctype="multipart/form-data">
+			<div style="text-align: center;">
+				<div class="brand" style="text-align: center;">
+					<h1 class="brand_name">Cargue Archivos</h1>
+				</div>
+			</div>
+
+			<p:growl id="messages" sticky="true" />
+
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage library="images" name="ajax-loader.gif" />
+			</p:dialog>
+
+
+
+
+			<p:fileUpload oncomplete="subirClientes()"
+				fileUploadListener="#{MBCargueArchivos.handleFileUploadCliente}"
+				onstart="limpia()" label="Seleccionar" multiple="false"
+				uploadLabel="Cargar Archivo" cancelLabel="Borrar"
+				allowTypes="/(\.|\/)(xls|xlsx)$/" id="txtArchivoClientes"
+				invalidFileMessage="Formato de archivo no soportado" />
+				
+				
+  <p:messages id="messages1" showDetail="true" closable="true">
+      
+    </p:messages>
+ 
+
+			<p:remoteCommand name="limpia"
+				actionListener="#{MBCargueArchivos.limpiar()}"
+				update="messages1, tbl">
+
+
+			</p:remoteCommand>
+
+
+
+			<p:remoteCommand name="subirClientes"
+				onstart="PF('statusDialog').show();  "
+				oncomplete="PF('statusDialog').hide();"
+				action="#{MBCargueArchivos.validarArchivo}" update="messages1, tbl">
+
+
+			</p:remoteCommand>
+
+			<div style="text-align: center;" >
+
+				<div class="ui-g">
+
+
+					<div class="ui-g-12 ui-lg-6">
+
+
+						<p:commandButton value="Guardar" style="width: 220px;"
+							rendered="true" onstart="PF('statusDialog').show();  "
+							oncomplete="PF('statusDialog').hide();"
+							action="#{MBCargueArchivos.procesarArchivo}" id="guardar">
+						</p:commandButton>
+					</div>
+
+
+
+					<div class="ui-g-12 ui-lg-6">
+
+
+
+
+
+
+
+						<p:commandButton value="Limpiar" style="width: 220px;"
+							rendered="true" onstart="PF('statusDialog').show();  "
+							oncomplete="PF('statusDialog').hide();" update='tbl'
+							action="#{MBCargueArchivos.limpiar}" id="limpiar">
+						</p:commandButton>
+
+					</div>
+				</div>
+			</div>
+			<p:dataTable id="tbl" var="var" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,15,20"
+				emptyMessage="Cargue sin inconsistencias"
+				value="#{MBCargueArchivos.listaInconsistencias}">
+
+
+				<f:facet name="header">
+        Inconsistencias
+    </f:facet>
+
+
+				<p:column headerText="Tipo">
+					<h:outputText value="#{var.tipo}" />
+				</p:column>
+
+				<p:column headerText="Valor">
+					<h:outputText value="#{var.valor}" />
+				</p:column>
+
+
+				<p:column headerText="Fila">
+					<h:outputText value="#{var.fila}" />
+				</p:column>
+
+				<p:column headerText="Columna">
+					<h:outputText value="#{var.columna}" />
+				</p:column>
+
+
+
+
+
+			</p:dataTable>
+
+
+
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

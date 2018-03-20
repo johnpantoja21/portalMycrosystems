@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8"></meta>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+	<meta name="description" content=""></meta>
+	<meta name="author" content=""></meta>
+
+
+	<title>Inicio</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="bootstrap.min2.css" rel="stylesheet"></link>
+
+	<!-- Custom styles for this template -->
+	<link href="signin.css" rel="stylesheet"></link>
+</h:head>
+
+<h:body class="text-center">
+	<h:form class="form-signin">
+		<img class="mb-4"
+			src="https://www.mycrosystems.com.co/images/ESLOGAN-V4.png" alt=""
+			width="300" height="90"></img>
+		<h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
+		<!--       <label for="inputEmail" class="sr-only">Email address</label> -->
+		<input type="email" id="inputEmail" class="form-control"
+			placeholder="Identificación" autofocus=""></input>
+		<!--       <label for="inputPassword" class="sr-only">Password</label> -->
+		<input type="password" id="inputPassword" class="form-control"
+			placeholder="Contraseña"></input>
+		<div class="checkbox mb-3">
+			<label> <a href="#"> Recordar Contraseña</a>
+			</label>
+		</div>
+		<p:commandButton styleClass="btn btn-lg btn-primary btn-block"
+			value="Iniciar sesión" style=" font-size: 15px !important;"
+			action="#{MBLogin.navegarControl}" />
+
+		<p class="mt-5 mb-3 text-muted">
+			<a href="https://www.mycrosystems.com.co/">
+				www.mycrosystems.com.co</a>
+		</p>
+	</h:form>
+
+
+</h:body>
+</html>

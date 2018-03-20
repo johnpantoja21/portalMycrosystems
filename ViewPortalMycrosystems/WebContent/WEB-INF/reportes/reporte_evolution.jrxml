@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte Evolution" language="groovy" pageWidth="936" pageHeight="612" orientation="Landscape" columnWidth="896" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34e1d85a-eb7a-477b-af9e-cb8f2d0225e4">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="687"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Workspaces\\FenalcoWebLogic\\PROYECTOS\\soportePagos\\ViewSoportePagos\\WebContent\\WEB-INF\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT Encuesta_1.IdTransaccion,
+       Encuesta_1.IdTrans_Original,
+       Encuesta_1.Fecha_Hora,
+       Encuesta_1.Telefono,
+       Encuesta_1.Resp_1,
+       Encuesta_1.Resp_2,
+       Encuesta_1.Resp_3,
+       (select NOMBRE + ' ' + apellido1 agente
+          from dbo.usuario
+         where  idUsuario = TRANSACCION.idAgente ) Agente
+  FROM Encuesta_1,
+       TRANSACCION
+ where Encuesta_1.IdTrans_Original = TRANSACCION.idTransaccion]]>
+	</queryString>
+	<field name="IdTransaccion" class="java.math.BigDecimal"/>
+	<field name="IdTrans_Original" class="java.math.BigDecimal"/>
+	<field name="Fecha_Hora" class="java.sql.Timestamp"/>
+	<field name="Telefono" class="java.lang.String"/>
+	<field name="Resp_1" class="java.lang.String"/>
+	<field name="Resp_2" class="java.lang.String"/>
+	<field name="Resp_3" class="java.lang.String"/>
+	<field name="Agente" class="java.lang.String"/>
+	<variable name="SUMA_SUBTOTAL" class="java.math.BigDecimal" resetType="Group" resetGroup="AGRUPACION DOCUMENTO" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="SUMA_TOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="AGRUPACION DOCUMENTO">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<group name="AGRUPACION FECHA PROCESO" minHeightToStartNewPage="80">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<group name="AGRUPACION CODIGO">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e634401d-7453-4f21-bfca-2a833fcb9d5c" key="staticText-15" x="0" y="0" width="896" height="50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="24" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EVOLUTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="52a3a744-8fdd-4ad3-9516-d53584d9e842" x="0" y="60" width="144" height="20" isPrintInFirstWholeBand="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID TRANSACCION ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6576801b-c754-4b9e-bd64-d64bbb0343bb" x="144" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fd0b252-ed18-44a1-a00b-a31255272138" x="244" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3987763b-605a-4643-b206-5f7cb4d0344c" x="344" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPUESTA UNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba35c712-0299-4719-b219-1235c12c21a8" x="444" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPUESTA DOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="87a727ce-6e6f-46ee-b5f5-6b4238c7c774" x="544" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPUESTA TRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46bebac0-98cd-4ffa-b3ba-79e93dce29ab" x="644" y="60" width="252" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGENTE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f2b05dab-265f-42e4-b069-3474b4199cc8" x="0" y="0" width="144" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{IdTrans_Original}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a486f2de-2322-4199-b5da-b032f4f66ba8" x="144" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Fecha_Hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c3719767-4708-43f1-9d5f-b1498a96cdc6" x="244" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3c88f085-dc48-4824-9da9-c4b4b1d6fde1" x="344" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Resp_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d439665a-b5ca-4eda-bf98-334d94936caa" x="444" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Resp_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aebf9289-54ed-497e-9b97-67d393594063" x="544" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Resp_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="29058a23-2a64-4678-8b5a-73a1682a9d27" x="644" y="1" width="252" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Agente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="18" splitType="Stretch"/>
+	</summary>
+</jasperReport>

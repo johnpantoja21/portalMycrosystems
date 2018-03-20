@@ -1,0 +1,169 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/view/menu/template.xhtml">
+	<ui:define name="content">
+		<h:form id="formPrincipal">
+			<div style="text-align: center;">
+				<div class="brand" style="text-align: center;">
+					<h1 class="brand_name">Afiliados</h1>
+				</div>
+			</div>
+
+
+
+
+
+			<p:tabView id="tapView">
+
+
+				<p:tab id="tapRegistro" title="Registro">
+
+					<p:growl id="messages1" sticky="true" />
+
+					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+						closable="false" resizable="false" showHeader="false">
+						<p:graphicImage library="images" name="ajax-loader.gif" />
+					</p:dialog>
+					
+					
+						<p:panel id="panelRegistrar">
+						
+					<div align="center">
+
+
+
+						<div class="ui-g">
+
+
+							<div class="ui-g-12 ui-lg-6">
+
+
+								<h:outputText style="    font-weight: bold; " value="Nit : " />
+							</div>
+
+							<div class="ui-g-12 ui-lg-6">
+								<p:inputText id="nit" maxlength="100" 
+									value="#{MBAfiliado.afiliado.nit}">
+								</p:inputText>
+							</div>
+							<div class="ui-g-12 ui-lg-6">
+								<h:outputText style="    font-weight: bold; " value="Nombre : " />
+							</div>
+							<div class="ui-g-12 ui-lg-6">
+								<p:inputText id="idNombre" maxlength="100"  
+									value="#{MBAfiliado.afiliado.nombre}">
+								</p:inputText>
+							</div>
+							<div class="ui-g-12 ui-lg-6">
+
+
+
+
+								<p:commandButton value="Guardar" style="width: 220px;"
+									onstart="PF('statusDialog').show();  "
+									oncomplete="PF('statusDialog').hide();"
+									update=":formPrincipal:tapView, messages1
+							,:formPrincipal:tapView:tbl"
+									action="#{MBAfiliado.guardarAfiliado}" id="guardar">
+								</p:commandButton>
+							</div>
+							<div class="ui-g-12 ui-lg-6">
+								<p:commandButton value="Limpiar" style="width: 220px;"
+									onstart="PF('statusDialog').show();  "
+									oncomplete="PF('statusDialog').hide();"
+									update=":formPrincipal:tapView:panelRegistrar" action="#{MBAfiliado.limpiar}"
+									id="limpiar">
+								</p:commandButton>
+							</div>
+
+
+						</div>
+
+					</div>
+</p:panel>
+				</p:tab>
+
+				<p:tab id="tapConsulta" title="Consulta / Modificación">
+
+
+					<div align="center">
+
+						<p:panel id="panelModificar">
+							<div class="ui-g">
+
+
+							
+
+								<div class="ui-g-12 ui-lg-6">
+									<h:outputText style="    font-weight: bold; " value="Nombre : " />
+								</div>
+								<div class="ui-g-12 ui-lg-6">
+									<p:inputText id="idNombreM" maxlength="100"
+										value="#{MBAfiliado.afiliadoSeleccionado.nombre}">
+									</p:inputText>
+								</div>
+								<div class="ui-g-12 ui-lg-6">
+
+									<p:commandButton value="Modificar" style="width: 220px;"
+										update=":formPrincipal:tapView:panelModificar, messages1
+							,:formPrincipal:tapView:tbl"
+							 action="#{MBAfiliado.modificarAfiliado}"
+										id="modificar">
+									</p:commandButton>
+								</div>
+
+								<div class="ui-g-12 ui-lg-6">
+									<p:commandButton value="Limpiar" style="width: 220px;"
+									 action="#{MBAfiliado.limpiar}"
+										update=":formPrincipal:tapView:panelModificar" id="limpiarModificar">
+									</p:commandButton>
+								</div>
+
+
+
+							</div>
+
+
+							<br></br>
+
+
+
+							<p:dataTable id="tbl" var="var" selectionMode="single"
+								selection="#{MBAfiliado.afiliadoSeleccionado}"
+								rowKey="#{var.nit}" value="#{MBAfiliado.listAfiliados}">
+
+
+								<p:ajax event="rowSelect" 
+									update=":formPrincipal:tapView:panelModificar" />
+
+
+								<p:column headerText="Nit">
+									<h:outputText value="#{var.nit}" />
+								</p:column>
+
+								<p:column headerText="Nombre">
+									<h:outputText value="#{var.nombre}" />
+								</p:column>
+
+
+							</p:dataTable>
+						</p:panel>
+
+
+					</div>
+				</p:tab>
+
+			</p:tabView>
+
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
